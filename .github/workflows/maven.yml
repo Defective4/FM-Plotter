@@ -1,0 +1,15 @@
+on: push
+
+jobs:
+   maven:
+      runs-on: self-hosted
+      steps:
+      -  name: Checkout
+         uses: http://10.0.0.1:3000/actions/checkout@v4
+      -  name: Maven CI
+         run: mvn -T 2C package
+      -  name: Upload artifact
+         uses: http://10.0.0.1:3000/actions/upload-artifact@v4
+         with:
+            name: fm-plotter.zip
+            path: target/*.jar
